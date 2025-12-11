@@ -9,6 +9,7 @@ async function sortHackerNewsArticles() {
   const context = await browser.newContext();
   const page = await context.newPage();
 
+  // Test pages
   testNewestNews(page);
 
   return 0;
