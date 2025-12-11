@@ -55,6 +55,8 @@ async function sortHackerNewsArticles() {
     if (error.stack)
       console.error(error.stack);
   }
+
+  return;
   
 }
 
