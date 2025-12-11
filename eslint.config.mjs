@@ -8,11 +8,13 @@ export default defineConfig([
     ignores: ["node_modules/**", "dist/**"],
     plugins: { js }, 
     extends: ["js/recommended"], 
-    languageOptions: { globals: globals.browser } 
+    languageOptions: { globals: globals.browser },
+    env: { node: true }
   },
   { 
     files: ["**/*.js"], 
     ignores: ["node_modules/**", "dist/**"],
-    languageOptions: { sourceType: "commonjs" } 
+    languageOptions: { sourceType: "commonjs" },
+    env: { node: true }
   },
 ]);
