@@ -30,15 +30,19 @@ async function sortHackerNewsArticles() {
       });
       const tableData = page.locator('td').filter({ has: spanText });
       const tableRow = page.locator('tr.athing.submission').filter({ has: tableData });
-    
+      
+      // Extract the id of the entry
       const id = await tableRow.getAttribute('id');
+
+      // Get the corresponding link element for this id
       const aString = "a[href=\"item?id=" + id + "\"]";
       const timeLink = page.locator(aString).filter({
         hasText: /[0-9]+\s[A-Za-z]+\sago/i          
       });
       const time = await timeLink.innerHTML();
-      const convertedTime = convertTime(time);
 
+      // Convert to comparable number and check that ordering is correct
+      const convertedTime = convertTime(time);
       await expect(convertedTime >= previousTime).toBeTruthy();
       previousTime = convertedTime;
 
