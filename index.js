@@ -1,6 +1,7 @@
 // EDIT THIS FILE TO COMPLETE ASSIGNMENT QUESTION 1
 const { chromium } = require("playwright");
 const { testNewestNews } = require("./tests/newest")
+const { testPastNews } = require("./tests/past")
 
 async function sortHackerNewsArticles() {
   
@@ -10,10 +11,20 @@ async function sortHackerNewsArticles() {
   const page = await context.newPage();
 
   // Test pages
-  testNewestNews(page);
+  try {
 
-  return 0;
-  
+    await testNewestNews(page);
+    await testPastNews(page);
+    browser.close();          // Script does not end if browser does not close
+    return 0;
+
+  } catch (error) {
+    console.error("Testing Has Failed: ");
+    console.error(error);
+    browser.close();
+    return -1;
+  }
+
 }
 
 (async () => {

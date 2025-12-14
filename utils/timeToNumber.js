@@ -4,7 +4,7 @@ function convertTime(time) {
     if (matchesRegex) {
         const splitString = time.split(" ");
         const day = parseInt(splitString[2].slice(0, -1));
-        const month = monthMappings(splitString[1]);
+        const month = monthToNumber.get(splitString[1]);
         const year = parseInt(splitString[3]);
 
         const today = new Date();
