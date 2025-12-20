@@ -10,17 +10,19 @@ async function testPastNews(page) {
 
         // Go to Past News (currently yesterday)
         await page.goto("https://news.ycombinator.com/front");
+
+        // Read past date from website
         const dateFormated = await page.locator('font').filter({
             hasText: /[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/i          
         }).innerHTML();
         const [year, month, day] = dateFormated.split('-').map(Number);
         let date = new Date(Date.UTC(year, month-1, day, 23, 59, 59));      // As month is 0-11
 
+        // Test yesterday
         process.stdout.write("\tTesting Past Landing Page.")
         let trackedTime = (Date.now() - date.getTime()) / 60000;    // Calculate time (in min) since today
         await testPastDate(page, trackedTime);                            // Test the date 
         process.stdout.write(" ✅\n");
-        
 
         // Test going back a day
         date.setDate(date.getDate() - 1);                           // Decrement date tracker
